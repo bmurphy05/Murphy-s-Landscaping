@@ -8,6 +8,8 @@ import {
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
 import { JobType } from './JobType';
+import { Customer } from './Customer';
+import { Employee } from './Employee';
 
 @Entity('jobs')
 @ObjectType()
@@ -25,10 +27,6 @@ export class Job extends BaseEntity {
     @ManyToOne(() => Employee, employee => employee.id)
     @Column('text', { nullable: true })
     employeeid: string;
-
-    @Field()
-    @Column('text')
-    jobType: string;
 
     @Field()
     @Column('boolean', { default: false })

@@ -3,12 +3,9 @@ import {
     Column,
     PrimaryGeneratedColumn,
     BaseEntity,
-    OneToOne,
-    OneToMany
+    OneToOne
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
-import { Employee } from './Employee';
-import { Customer } from './Customer';
 import { Address } from './Address';
 
 
