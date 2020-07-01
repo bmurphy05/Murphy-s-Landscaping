@@ -43,22 +43,10 @@ export class User extends BaseEntity {
     @Column('text')
     userType!: number;
 
-    @Field(() => [Employee], { nullable: true })
-    @OneToMany(() => Employee, Employee => Employee.userid, {
+    @Field(() => Address)
+    @OneToOne(() => Address, address => address.user, {
         onDelete: 'CASCADE'
     })
-    employee: Employee[];
-
-    @Field(() => [Customer], { nullable: true })
-    @OneToMany(() => Customer, Customer => Customer.userid, {
-        onDelete: 'CASCADE'
-    })
-    customer: Customer[];
-
-    @Field(() => [Address], { nullable: true })
-    @OneToOne(() => Address, Address => Address.userId, {
-        onDelete: 'CASCADE'
-    })
-    address: Address[];
+    address: string;
     
 }

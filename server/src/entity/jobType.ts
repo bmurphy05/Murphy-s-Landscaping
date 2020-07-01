@@ -2,15 +2,13 @@ import {
     Entity,
     Column,
     PrimaryGeneratedColumn,
-    BaseEntity,
-    OneToOne
+    BaseEntity
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
-import { Job } from './Job';
 
 @Entity('jobtypes')
 @ObjectType()
-export class jobType extends BaseEntity {
+export class JobType extends BaseEntity {
     @Field()
     @PrimaryGeneratedColumn('uuid')
     id!: string;
@@ -22,10 +20,5 @@ export class jobType extends BaseEntity {
     @Field()
     @Column('text')
     description!: string;
-
-    @OneToOne(() => Job, job => job.jobType)
-    @Field(() => [Job], { nullable: true })
-    jobs: Job[];
-
 
 }

@@ -18,24 +18,12 @@ export class Employee extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 
-    @Field()
+    @Field(() => User)
+    @ManyToOne(() => User, user => user.id)
     @Column('text')
-    userid!: string;
+    user!: string;
     
     @Field()
     @Column('text')
     role!: string;
-
-    @ManyToOne(() => User, user => user.userType, {
-        onDelete: 'CASCADE'
-    })
-    @JoinColumn({ name: 'user' })
-    @Field(() => User)
-    @Column('uuid')
-    user!: string;
-
-    @OneToOne(() => Role, role => role.title)
-    @Field(() => [Role], { nullable: true })
-    roles: Role[];
-
 }

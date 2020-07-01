@@ -15,9 +15,10 @@ export class Address extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 
-    @Field()
+    @Field(() => User)
+    @OneToOne(() => User, user => user.id)
     @Column('text')
-    userId!: string;
+    user!: string;
 
     @Field()
     @Column('text')
@@ -30,9 +31,4 @@ export class Address extends BaseEntity {
     @Field()
     @Column('text')
     state!: string;
-
-    @OneToOne(() => User, user => user.userType)
-    @Field(() => [User], { nullable: true })
-    users: User[];
-
 }

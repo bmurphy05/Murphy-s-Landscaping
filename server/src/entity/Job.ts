@@ -4,11 +4,10 @@ import {
     PrimaryGeneratedColumn,
     BaseEntity,
     OneToOne,
-    OneToMany
+    ManyToOne
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
-import { jobType } from './jobType';
-import { Expense } from './Expense';
+import { JobType } from './JobType';
 
 @Entity('jobs')
 @ObjectType()
@@ -17,13 +16,15 @@ export class Job extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 
-    @Field()
+    @Field(() => Customer)
+    @ManyToOne(() => Customer, customer => customer.id)
     @Column('text')
     customerid!: string;
 
-    @Field()
-    @Column('text')
-    employeeid!: string;
+    @Field(() => Employee, { nullable: true })
+    @ManyToOne(() => Employee, employee => employee.id)
+    @Column('text', { nullable: true })
+    employeeid: string;
 
     @Field()
     @Column('text')
@@ -53,16 +54,8 @@ export class Job extends BaseEntity {
     @Column('timestamp')
     datePaid!: string;
 
-    @Field(() => [Expense], { nullable: true })
-    @OneToMany(() => Expense, expense => expense.jobId, {
-        eager: true,
-        onDelete: 'CASCADE'
-    })
-    expenses: Expense[];
-
-    @OneToOne(() => jobType, jobType => jobType.title)
-    @Field(() => [jobType], { nullable: true })
-    jobtypes: jobType[];
-
-
+    @Field(() => JobType)
+    @OneToOne(() => JobType)
+    @Column('text')
+    jobType!: string;
 }

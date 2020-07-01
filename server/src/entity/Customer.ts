@@ -15,12 +15,8 @@ export class Customer extends BaseEntity {
     @Field()
     @PrimaryGeneratedColumn('uuid')
     id!: string;
-
-    @Field()
-    @Column('text')
-    userid!: string;
     
-    @ManyToOne(() => User, user => user.userType, {
+    @ManyToOne(() => User, user => user.id, {
         onDelete: 'CASCADE'
     })
     @JoinColumn({ name: 'user' })

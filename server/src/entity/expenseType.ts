@@ -10,7 +10,7 @@ import { Expense } from './Expense';
 
 @Entity('expensetypes')
 @ObjectType()
-export class expenseType extends BaseEntity {
+export class ExpenseType extends BaseEntity {
     @Field()
     @PrimaryGeneratedColumn('uuid')
     id!: string;
@@ -22,10 +22,4 @@ export class expenseType extends BaseEntity {
     @Field()
     @Column('text')
     description!: string;
-
-    @OneToOne(() => Expense, expense => expense.expenseType)
-    @Field(() => [Expense], { nullable: true })
-    expenses: Expense[];
-
-
 }
