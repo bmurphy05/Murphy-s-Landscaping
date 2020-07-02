@@ -33,17 +33,21 @@ export class User extends BaseEntity {
     lastName!: string;
     
     @Field()
-    @Column('text')
+    @Column('int')
     phone!: number;
     
     @Field()
     @Column('text')
     userType!: number;
 
-    @Field(() => Address)
+    @Field(() => Address, { nullable: true })
     @OneToOne(() => Address, address => address.user, {
         onDelete: 'CASCADE'
     })
-    address: string;
+    @Column('text', { nullable: true })
+    address: Address;
     
+    @Field(() => Date)
+    @Column('timestamp')
+    creationTime!: string;
 }
