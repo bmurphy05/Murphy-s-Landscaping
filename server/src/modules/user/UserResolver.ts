@@ -7,14 +7,20 @@ export class UserResolver {
   @Query(() => [User])
   async users() {
     return User.find({
-      relations: ["address"]
+      relations: [
+        'address',
+        'role'
+      ]
     });
   }
 
   @Query(() => User)
   async user(@Arg("id") id: string) {
     return User.findOne({
-      relations: ["address"],
+      relations: [
+        'address',
+        'role'
+      ],
       where: {
         id
       }
@@ -29,7 +35,7 @@ export class UserResolver {
     firstName,
     lastName,
     phone,
-    userType
+    role
   }: RegisterInput): Promise<Boolean> {
     const creationTime = new Date().toISOString();
 
@@ -39,7 +45,7 @@ export class UserResolver {
       firstName,
       lastName,
       phone,
-      userType,
+      role,
       creationTime
     }).save();
 
