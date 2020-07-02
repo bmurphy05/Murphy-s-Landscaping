@@ -16,5 +16,4 @@ export class Role extends BaseEntity {
     @Field()
     @Column('text')
     title!: string;
-
 }

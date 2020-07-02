@@ -25,6 +25,5 @@ export class RegisterInput {
   phone: number;
 
   @Field()
-  userType: number;
-
+  role: string;
 }
