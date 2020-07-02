@@ -2,11 +2,9 @@ import {
     Entity,
     Column,
     PrimaryGeneratedColumn,
-    BaseEntity,
-    OneToOne
+    BaseEntity
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
-import { Expense } from './Expense';
 
 @Entity('expensetypes')
 @ObjectType()
