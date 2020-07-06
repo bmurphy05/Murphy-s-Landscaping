@@ -1,20 +1,20 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
-import { Address } from "../../entity/Address";
-import { AddressInput } from "./input/AddressInput";
+import { Job } from "../../entity/Job";
+import { JobInput } from "./input/JobInput";
 
 @Resolver()
-export class AddressResolver {
-  @Query(() => [Address])
-  async addresses() {
-    return Address.find({
-      relations: ["user"]
+export class JobResolver {
+  @Query(() => [Job])
+  async jobs() {
+    return Job.find({
+      relations: ["user", "user", "jobtype"]
     });
   }
 
-  @Query(() => Address)
-  async address(@Arg("id") id: string) {
-    return Address.findOne({
-      relations: ["user"],
+  @Query(() => Job)
+  async job(@Arg("id") id: string) {
+    return Job.findOne({
+      relations: ["user", "user", "jobtype"],
       where: {
         id
       }
@@ -22,38 +22,36 @@ export class AddressResolver {
   }
 
   @Mutation(() => Boolean)
-  async createAddress(@Arg("input")
+  async createJob(@Arg("input")
   {
-    user,
-    street,
-    city,
-    state,
-    zip
-  }: AddressInput): Promise<Boolean> {
-    await Address.create({
-      user,
-      street,
-      city,
-      state,
-      zip
+    customer,
+    employee,
+    cost,
+    jobType
+  }: JobInput): Promise<Boolean> {
+    await Job.create({
+        customer,
+        employee,
+        cost,
+        jobType
     }).save();
 
     return true;
   }
 
   @Mutation(() => Boolean)
-  async deleteAddress(@Arg("id") id: string): Promise<Boolean> {
-    const address = await Address.findOne({
+  async deleteJob(@Arg("id") id: string): Promise<Boolean> {
+    const job = await Job.findOne({
       where: {
         id
       }
     });
 
-    if (!address) {
+    if (!job) {
       return false;
     }
 
-    await Address.delete({ id });
+    await Job.delete({ id });
 
     return true;
   }

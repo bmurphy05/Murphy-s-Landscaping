@@ -21,12 +21,12 @@ export class Job extends BaseEntity {
     @Field(() => Customer)
     @ManyToOne(() => Customer, customer => customer.id)
     @Column('text')
-    customerid!: string;
+    customer!: string;
 
     @Field(() => Employee, { nullable: true })
     @ManyToOne(() => Employee, employee => employee.id)
     @Column('text', { nullable: true })
-    employeeid: string;
+    employee: string;
 
     @Field()
     @Column('boolean', { default: false })

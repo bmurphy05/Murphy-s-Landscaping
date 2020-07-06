@@ -1,20 +1,17 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
-import { Address } from "../../entity/Address";
-import { AddressInput } from "./input/AddressInput";
+import { ExpenseType } from "../../entity/ExpenseType";
+import { ExpenseTypeInput } from "./input/ExpenseTypeInput";
 
 @Resolver()
-export class AddressResolver {
-  @Query(() => [Address])
-  async addresses() {
-    return Address.find({
-      relations: ["user"]
-    });
+export class ExpenseResolver {
+  @Query(() => [ExpenseType])
+  async expenseTypes() {
+    return ExpenseType.find();
   }
 
-  @Query(() => Address)
-  async address(@Arg("id") id: string) {
-    return Address.findOne({
-      relations: ["user"],
+  @Query(() => ExpenseType)
+  async expenseType(@Arg("id") id: string) {
+    return ExpenseType.findOne({
       where: {
         id
       }
@@ -22,38 +19,32 @@ export class AddressResolver {
   }
 
   @Mutation(() => Boolean)
-  async createAddress(@Arg("input")
+  async createExpenseType(@Arg("input")
   {
-    user,
-    street,
-    city,
-    state,
-    zip
-  }: AddressInput): Promise<Boolean> {
-    await Address.create({
-      user,
-      street,
-      city,
-      state,
-      zip
+    title,
+    description
+  }: ExpenseTypeInput): Promise<Boolean> {
+    await ExpenseType.create({
+      title,
+      description
     }).save();
 
     return true;
   }
 
   @Mutation(() => Boolean)
-  async deleteAddress(@Arg("id") id: string): Promise<Boolean> {
-    const address = await Address.findOne({
+  async deleteExpenseType(@Arg("id") id: string): Promise<Boolean> {
+    const expenseType = await ExpenseType.findOne({
       where: {
         id
       }
     });
 
-    if (!address) {
+    if (!expenseType) {
       return false;
     }
 
-    await Address.delete({ id });
+    await ExpenseType.delete({ id });
 
     return true;
   }

@@ -5,16 +5,16 @@ import { ExpenseInput } from "./input/ExpenseInput";
 @Resolver()
 export class ExpenseResolver {
   @Query(() => [Expense])
-  async expensees() {
+  async expenses() {
     return Expense.find({
-      relations: ["user"]
+      relations: ["job"]
     });
   }
 
   @Query(() => Expense)
-  async axpense(@Arg("id") id: string) {
+  async expense(@Arg("id") id: string) {
     return Expense.findOne({
-      relations: ["user"],
+      relations: ["job"],
       where: {
         id
       }

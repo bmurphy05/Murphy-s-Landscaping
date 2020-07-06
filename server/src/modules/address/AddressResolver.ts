@@ -7,14 +7,14 @@ export class AddressResolver {
   @Query(() => [Address])
   async addresses() {
     return Address.find({
-      relations: ["user"]
+      relations: ["user", "customer"]
     });
   }
 
   @Query(() => Address)
   async address(@Arg("id") id: string) {
     return Address.findOne({
-      relations: ["user"],
+      relations: ["user", "customer"],
       where: {
         id
       }
