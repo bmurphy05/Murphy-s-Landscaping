@@ -3,10 +3,12 @@ import {
     Column,
     PrimaryGeneratedColumn,
     BaseEntity,
-    OneToOne
+    OneToOne,
+    OneToMany
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
 import { Address } from './Address';
+import { Role } from './Role';
 
 
 @Entity('users')
@@ -35,10 +37,6 @@ export class User extends BaseEntity {
     @Field()
     @Column('int')
     phone!: number;
-    
-    @Field()
-    @Column('text')
-    userType!: number;
 
     @Field(() => Address, { nullable: true })
     @OneToOne(() => Address, address => address.user, {
@@ -47,6 +45,11 @@ export class User extends BaseEntity {
     @Column('text', { nullable: true })
     address: Address;
     
+    @Field(() => Role)
+    @OneToOne(() => Role)
+    @Column('text')
+    role: string;
+
     @Field(() => Date)
     @Column('timestamp')
     creationTime!: string;

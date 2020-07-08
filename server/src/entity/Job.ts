@@ -8,8 +8,7 @@ import {
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
 import { JobType } from './JobType';
-import { Customer } from './Customer';
-import { Employee } from './Employee';
+import { User } from './User';
 
 @Entity('jobs')
 @ObjectType()
@@ -18,13 +17,13 @@ export class Job extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 
-    @Field(() => Customer)
-    @ManyToOne(() => Customer, customer => customer.id)
+    @Field(() => User)
+    @ManyToOne(() => User, customer => customer.id)
     @Column('text')
     customer!: string;
 
-    @Field(() => Employee, { nullable: true })
-    @ManyToOne(() => Employee, employee => employee.id)
+    @Field(() => User, { nullable: true })
+    @ManyToOne(() => User, employee => employee.id)
     @Column('text', { nullable: true })
     employee: string;
 
