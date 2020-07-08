@@ -3,12 +3,9 @@ import {
     Column,
     PrimaryGeneratedColumn,
     BaseEntity,
-    OneToOne,
-    ManyToOne,
-    JoinColumn
+    ManyToOne
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
-import { Role } from './Role';
 import { User } from './User';
 
 @Entity('employees')
