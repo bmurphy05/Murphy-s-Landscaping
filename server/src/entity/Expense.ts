@@ -3,13 +3,10 @@ import {
     Column,
     PrimaryGeneratedColumn,
     BaseEntity,
-    ManyToOne,
-    OneToOne,
-    JoinColumn
+    ManyToOne
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
 import { Job } from './Job';
-import { ExpenseType } from './ExpenseType';
 
 @Entity('expenses')
 @ObjectType()
@@ -19,23 +16,18 @@ export class Expense extends BaseEntity {
     id!: string;
 
     @Field()
-    @Column('text')
-    jobId!: string;
-
-    @Field()
     @Column('float')
     cost!: number;
 
-    @ManyToOne(() => Job, job => job.jobType, {
-        onDelete: 'CASCADE'
+    @ManyToOne(() => Job, {
+        eager: true
     })
-    @JoinColumn({ name: 'job' })
     @Field(() => Job)
     @Column('uuid')
     job!: string;
 
-    @OneToOne(() => ExpenseType)
-    @Field(() => ExpenseType)
-    expensetype!: string;
+    @Field(() => String)
+    @Column('text')
+    expenseType!: string;
 
 }

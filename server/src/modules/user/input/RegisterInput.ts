@@ -22,7 +22,7 @@ export class RegisterInput {
   lastName: string;
 
   @Field()
-  phone: number;
+  phone: string;
 
   @Field()
   role: string;

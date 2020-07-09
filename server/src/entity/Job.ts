@@ -3,12 +3,12 @@ import {
     Column,
     PrimaryGeneratedColumn,
     BaseEntity,
-    OneToOne,
-    ManyToOne
+    ManyToOne,
+    OneToMany
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
-import { JobType } from './JobType';
 import { User } from './User';
+import { Expense } from './Expense';
 
 @Entity('jobs')
 @ObjectType()
@@ -30,29 +30,32 @@ export class Job extends BaseEntity {
     @Field()
     @Column('boolean', { default: false })
     isComplete!: boolean;
-    
+
     @Field()
     @Column('boolean', { default: false })
     isPaid!: boolean;
-    
+
     @Field(() => Date)
     @Column('timestamp')
     dateRequested!: string;
 
     @Field(() => Date)
-    @Column('timestamp',  { nullable: true })
+    @Column('timestamp', { nullable: true })
     dateCompleted!: string;
-    
+
     @Field()
     @Column('float')
     cost!: number;
-    
+
     @Field(() => Date)
-    @Column('timestamp')
+    @Column('timestamp', { nullable: true })
     datePaid!: string;
 
-    @Field(() => JobType)
-    @OneToOne(() => JobType)
+    @Field(() => String)
     @Column('text')
     jobType!: string;
+
+    @Field(() => [Expense], { nullable: true })
+    @OneToMany(() => Expense, expenses => expenses.job)
+    expenses: Expense[];
 }

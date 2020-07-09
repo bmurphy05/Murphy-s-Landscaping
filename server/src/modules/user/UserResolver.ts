@@ -8,8 +8,7 @@ export class UserResolver {
   async users() {
     return User.find({
       relations: [
-        'address',
-        'role'
+        'address'
       ]
     });
   }
@@ -18,8 +17,7 @@ export class UserResolver {
   async user(@Arg("id") id: string) {
     return User.findOne({
       relations: [
-        'address',
-        'role'
+        'address'
       ],
       where: {
         id

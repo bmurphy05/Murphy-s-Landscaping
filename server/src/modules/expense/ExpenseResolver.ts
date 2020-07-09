@@ -1,20 +1,20 @@
-import { Resolver, Query, Mutation, Arg } from "type-graphql";
-import { Expense } from "../../entity/Expense";
-import { ExpenseInput } from "./input/ExpenseInput";
+import { Resolver, Query, Mutation, Arg } from 'type-graphql';
+import { Expense } from '../../entity/Expense';
+import { ExpenseInput } from './input/ExpenseInput';
 
 @Resolver()
 export class ExpenseResolver {
   @Query(() => [Expense])
   async expenses() {
     return Expense.find({
-      relations: ["job"]
+      relations: ['job']
     });
   }
 
   @Query(() => Expense)
-  async expense(@Arg("id") id: string) {
+  async expense(@Arg('id') id: string) {
     return Expense.findOne({
-      relations: ["job"],
+      relations: ['job'],
       where: {
         id
       }
@@ -22,25 +22,23 @@ export class ExpenseResolver {
   }
 
   @Mutation(() => Boolean)
-  async createExpense(@Arg("input")
+  async createExpense(@Arg('input')
   {
-    jobId,
     cost,
     job,
-    expensetype
+    expenseType
   }: ExpenseInput): Promise<Boolean> {
     await Expense.create({
-      jobId,
       cost,
       job,
-      expensetype
+      expenseType
     }).save();
 
     return true;
   }
 
   @Mutation(() => Boolean)
-  async deleteExpense(@Arg("id") id: string): Promise<Boolean> {
+  async deleteExpense(@Arg('id') id: string): Promise<Boolean> {
     const expense = await Expense.findOne({
       where: {
         id

@@ -3,12 +3,10 @@ import {
     Column,
     PrimaryGeneratedColumn,
     BaseEntity,
-    OneToOne,
-    OneToMany
+    OneToMany,
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
 import { Address } from './Address';
-import { Role } from './Role';
 
 
 @Entity('users')
@@ -33,20 +31,19 @@ export class User extends BaseEntity {
     @Field()
     @Column('text')
     lastName!: string;
-    
-    @Field()
-    @Column('int')
-    phone!: number;
 
-    @Field(() => Address, { nullable: true })
-    @OneToOne(() => Address, address => address.user, {
-        onDelete: 'CASCADE'
+    @Field()
+    @Column('text')
+    phone!: string;
+
+    @Field(() => [Address], { nullable: true })
+    @OneToMany(() => Address, address => address.user, {
+        eager: true
     })
     @Column('text', { nullable: true })
     address: Address;
-    
-    @Field(() => Role)
-    @OneToOne(() => Role)
+
+    @Field(() => String)
     @Column('text')
     role: string;
 
