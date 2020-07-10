@@ -3,7 +3,8 @@ import {
     Column,
     PrimaryGeneratedColumn,
     BaseEntity,
-    OneToOne,
+    JoinColumn,
+    ManyToOne,
 } from 'typeorm';
 import { ObjectType, Field } from 'type-graphql';
 import { User } from './User';
@@ -16,13 +17,14 @@ export class Address extends BaseEntity {
     id!: string;
 
     @Field(() => User)
-    @OneToOne(() => User, user => user.id)
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'user' })
     @Column('text')
     user!: string;
 
     @Field()
     @Column('text')
-    address!: string;
+    street!: string;
 
     @Field()
     @Column('text')
@@ -31,4 +33,8 @@ export class Address extends BaseEntity {
     @Field()
     @Column('text')
     state!: string;
+
+    @Field()
+    @Column('int')
+    zip!: number;
 }
