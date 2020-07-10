@@ -47,6 +47,18 @@ export class User extends BaseEntity {
     @Column('text')
     role: string;
 
+    @Field()
+    @Column('boolean', { default: false })
+    confirmed!: boolean;
+
+    @Field()
+    @Column('int', { default: 0 })
+    tokenVersion: number;
+    
+    @Field()
+    @Column('boolean', { default: false })
+    forgotPasswordLock!: boolean;
+
     @Field(() => Date)
     @Column('timestamp')
     creationTime!: string;

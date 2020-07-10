@@ -1,9 +1,14 @@
-import { Resolver, Query, Mutation, Arg } from 'type-graphql';
+import { Resolver, Query, Mutation, Arg, UseMiddleware } from 'type-graphql';
 import { Job } from '../../entity/Job';
 import { JobInput } from './input/JobInput';
+import { isEmployee } from '../../middleware/isEmployee';
+import { isAuth } from '../../middleware/isAuth';
+import { logger } from '../../middleware/logger';
+import { Result } from '../../shared/Result';
 
 @Resolver()
 export class JobResolver {
+  @UseMiddleware(isAuth, isEmployee, logger)
   @Query(() => [Job])
   async jobs() {
     return Job.find({
@@ -11,6 +16,18 @@ export class JobResolver {
     });
   }
 
+  @UseMiddleware(isAuth, logger)
+  @Query(() => [Job])
+  async jobsByCustomer(customer: string) {
+    return Job.find({
+      relations: ['customer', 'employee', 'expenses'],
+      where: {
+        customer
+      }
+    });
+  }
+
+  @UseMiddleware(isAuth, logger)
   @Query(() => Job)
   async job(@Arg('id') id: string) {
     return Job.findOne({
@@ -21,29 +38,38 @@ export class JobResolver {
     });
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => Result)
+  @UseMiddleware(isAuth, logger)
   async createJob(@Arg('input')
   {
     customer,
     employee,
     cost,
     jobType
-  }: JobInput): Promise<Boolean> {
+  }: JobInput): Promise<Result> {
     const dateRequested = new Date().toISOString();
 
     await Job.create({
-        customer,
-        employee,
-        cost,
-        jobType,
-        dateRequested
+      customer,
+      employee,
+      cost,
+      jobType,
+      dateRequested
     }).save();
 
-    return true;
+    return {
+      success: [
+        {
+          path: 'create job',
+          message: `${jobType} job for Customer ${customer} created successfully`
+        }
+      ]
+    }
   }
 
-  @Mutation(() => Boolean)
-  async deleteJob(@Arg('id') id: string): Promise<Boolean> {
+  @UseMiddleware(isAuth, isEmployee, logger)
+  @Mutation(() => Result)
+  async deleteJob(@Arg('id') id: string): Promise<Result> {
     const job = await Job.findOne({
       where: {
         id
@@ -51,11 +77,23 @@ export class JobResolver {
     });
 
     if (!job) {
-      return false;
+      errors: [
+        {
+          path: 'delete job',
+          message: `Job could not be deleted`
+        }
+      ]
     }
 
     await Job.delete({ id });
 
-    return true;
+    return {
+      success: [
+        {
+          path: 'delete job',
+          message: `Job deleted successfully`
+        }
+      ]
+    }
   }
 }
