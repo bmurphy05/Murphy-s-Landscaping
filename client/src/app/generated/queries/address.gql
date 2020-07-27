@@ -1,0 +1,19 @@
+query addresses{
+  addresses{
+    id
+    street
+    city
+    state
+    zip
+  }
+}
+
+query address($data: String!){
+  address(id: $data) {
+    id
+    street
+    city
+    state
+    zip
+  }
+}

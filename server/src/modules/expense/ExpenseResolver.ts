@@ -5,7 +5,6 @@ import { isEmployee } from '../../middleware/isEmployee';
 import { isAuth } from '../../middleware/isAuth';
 import { logger } from '../../middleware/logger';
 import { Result } from '../../shared/Result';
-import { registerSuccess } from '../user/messages/messages';
 
 @Resolver()
 export class ExpenseResolver {

@@ -1,0 +1,25 @@
+mutation createAddress($data: AddressInput!) {
+  createAddress(input: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+
+mutation deleteAddress($data: String!) {
+  deleteAddress(id: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}

@@ -1,0 +1,35 @@
+query users {
+  users {
+    id
+    firstName
+    lastName
+    email
+    phone
+    address {
+      street
+      city
+      state
+      zip
+    }
+    role
+    creationTime
+  }
+}
+
+query user($data: String!) {
+  user(id: $data) {
+    id
+    firstName
+    lastName
+    email
+    phone
+    address {
+      street
+      city
+      state
+      zip
+    }
+    role
+    creationTime
+  }
+}

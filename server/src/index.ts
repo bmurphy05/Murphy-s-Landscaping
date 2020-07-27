@@ -4,7 +4,6 @@ import http from 'http';
 import { createConnection, getConnectionOptions } from 'typeorm';
 import express from 'express';
 import chalk from 'chalk'
-import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import session from 'express-session';
@@ -22,13 +21,10 @@ import { sendRefreshToken } from './shared/sendRefreshToken';
 (async () => {
   const app = express();
 
-  app.use(cors({
+  const corOptions = {
     credentials: true,
-    origin:
-      process.env.NODE_ENV === "test"
-        ? "*"
-        : (process.env.FRONTEND_HOST as string)
-  }));
+    origin: ['http://localhost:4200']
+  };
 
   app.use(cookieParser());
   app.post('/refresh_token', async (req, res) => {
@@ -121,7 +117,7 @@ import { sendRefreshToken } from './shared/sendRefreshToken';
     })
   );
 
-  apolloServer.applyMiddleware({ app, cors: false });
+  apolloServer.applyMiddleware({ app, cors: corOptions });
 
   const httpServer = http.createServer(app);
   apolloServer.installSubscriptionHandlers(httpServer);
