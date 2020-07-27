@@ -1,0 +1,35 @@
+mutation register($data: RegisterInput!) {
+  register(input: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+
+mutation login($data: LoginInput!) {
+  login(input: $data) {
+    success {
+      user {
+        id
+        firstName
+        lastName
+        role
+      }
+      accessToken
+      expiresIn
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+
+mutation logout {
+  logout
+}

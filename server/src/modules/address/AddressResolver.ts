@@ -1,6 +1,7 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
 import { Address } from "../../entity/Address";
 import { AddressInput } from "./input/AddressInput";
+import { Result } from "../../shared/Result";
 
 @Resolver()
 export class AddressResolver {
@@ -25,7 +26,7 @@ export class AddressResolver {
     });
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => Result)
   async createAddress(@Arg("input")
   {
     user,
@@ -33,7 +34,7 @@ export class AddressResolver {
     city,
     state,
     zip
-  }: AddressInput): Promise<Boolean> {
+  }: AddressInput): Promise<Result> {
     await Address.create({
       user,
       street,
@@ -42,11 +43,19 @@ export class AddressResolver {
       zip
     }).save();
 
-    return true;
+    
+    return {
+      success: [
+        {
+          path: 'create address',
+          message: `Address added for User ${user}`
+        }
+      ]
+    }
   }
 
-  @Mutation(() => Boolean)
-  async deleteAddress(@Arg("id") id: string): Promise<Boolean> {
+  @Mutation(() => Result)
+  async deleteAddress(@Arg("id") id: string): Promise<Result> {
     const address = await Address.findOne({
       where: {
         id
@@ -54,11 +63,26 @@ export class AddressResolver {
     });
 
     if (!address) {
-      return false;
+      return {
+        errors: [
+          {
+            path: 'address',
+            message: 'Delete failed'
+          }
+        ]
+      }
     }
 
     await Address.delete({ id });
 
-    return true;
+    
+    return {
+      success: [
+        {
+          path: 'delete address',
+          message: `Address for deleted`
+        }
+      ]
+    }
   }
 }
