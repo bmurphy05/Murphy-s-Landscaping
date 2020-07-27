@@ -8,8 +8,7 @@ export class AddressResolver {
   async addresses() {
     return Address.find({
       relations: [
-        'user',
-        'user.role'
+        'user'
       ]
     });
   }
@@ -18,8 +17,7 @@ export class AddressResolver {
   async address(@Arg("id") id: string) {
     return Address.findOne({
       relations: [
-        'user',
-        'user.role'
+        'user'
       ],
       where: {
         id
