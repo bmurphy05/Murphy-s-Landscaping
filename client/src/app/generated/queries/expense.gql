@@ -1,0 +1,69 @@
+query expenses{
+  expenses{
+    id
+    cost
+    job{
+      id
+      customer{
+        firstName
+        lastName
+        email
+        phone
+        address {
+          street
+          city
+          state
+          zip
+        }
+      }
+      employee{
+        firstName
+        lastName
+        role
+      }
+      isComplete
+      isPaid
+      dateRequested
+      dateCompleted
+      cost
+      datePaid
+      jobType
+    }
+  expenseType
+  }
+}
+
+query expense($data: String!){
+  expense(id: $data) {
+    id
+    cost
+    job {
+      id
+      customer{
+        firstName
+        lastName
+        email
+        phone
+        address {
+          street
+          city
+          state
+          zip
+        }
+      }
+      employee{
+        firstName
+        lastName
+        role
+      }
+      isComplete
+      isPaid
+      dateRequested
+      dateCompleted
+      cost
+      datePaid
+      jobType
+    }
+    expenseType
+  }
+}

@@ -281,6 +281,82 @@ export type DeleteAddressMutation = (
   ) }
 );
 
+export type CreateExpenseMutationVariables = Exact<{
+  data: ExpenseInput;
+}>;
+
+
+export type CreateExpenseMutation = (
+  { __typename?: 'Mutation' }
+  & { createExpense: (
+    { __typename?: 'Result' }
+    & { success?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>>, errors?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>> }
+  ) }
+);
+
+export type DeleteExpenseMutationVariables = Exact<{
+  data: Scalars['String'];
+}>;
+
+
+export type DeleteExpenseMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteExpense: (
+    { __typename?: 'Result' }
+    & { success?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>>, errors?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>> }
+  ) }
+);
+
+export type CreateJobMutationVariables = Exact<{
+  data: JobInput;
+}>;
+
+
+export type CreateJobMutation = (
+  { __typename?: 'Mutation' }
+  & { createJob: (
+    { __typename?: 'Result' }
+    & { success?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>>, errors?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>> }
+  ) }
+);
+
+export type DeleteJobMutationVariables = Exact<{
+  data: Scalars['String'];
+}>;
+
+
+export type DeleteJobMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteJob: (
+    { __typename?: 'Result' }
+    & { success?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>>, errors?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>> }
+  ) }
+);
+
 export type RegisterMutationVariables = Exact<{
   data: RegisterInput;
 }>;
@@ -331,6 +407,82 @@ export type LogoutMutation = (
   & Pick<Mutation, 'logout'>
 );
 
+export type ConfirmUserMutationVariables = Exact<{
+  data: Scalars['String'];
+}>;
+
+
+export type ConfirmUserMutation = (
+  { __typename?: 'Mutation' }
+  & { confirmUser: (
+    { __typename?: 'Result' }
+    & { success?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>>, errors?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>> }
+  ) }
+);
+
+export type ForgotPasswordMutationVariables = Exact<{
+  data: Scalars['String'];
+}>;
+
+
+export type ForgotPasswordMutation = (
+  { __typename?: 'Mutation' }
+  & { forgotPassword: (
+    { __typename?: 'Result' }
+    & { success?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>>, errors?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>> }
+  ) }
+);
+
+export type ChangePasswordMutationVariables = Exact<{
+  data: ChangePasswordInput;
+}>;
+
+
+export type ChangePasswordMutation = (
+  { __typename?: 'Mutation' }
+  & { changePassword: (
+    { __typename?: 'Result' }
+    & { success?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>>, errors?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>> }
+  ) }
+);
+
+export type DeleteUserMutationVariables = Exact<{
+  data: Scalars['String'];
+}>;
+
+
+export type DeleteUserMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteUser: (
+    { __typename?: 'Result' }
+    & { success?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>>, errors?: Maybe<Array<(
+      { __typename?: 'Response' }
+      & Pick<Response, 'path' | 'message'>
+    )>> }
+  ) }
+);
+
 export type AddressesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -353,6 +505,137 @@ export type AddressQuery = (
     { __typename?: 'Address' }
     & Pick<Address, 'id' | 'street' | 'city' | 'state' | 'zip'>
   ) }
+);
+
+export type ExpensesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ExpensesQuery = (
+  { __typename?: 'Query' }
+  & { expenses: Array<(
+    { __typename?: 'Expense' }
+    & Pick<Expense, 'id' | 'cost' | 'expenseType'>
+    & { job: (
+      { __typename?: 'Job' }
+      & Pick<Job, 'id' | 'isComplete' | 'isPaid' | 'dateRequested' | 'dateCompleted' | 'cost' | 'datePaid' | 'jobType'>
+      & { customer: (
+        { __typename?: 'User' }
+        & Pick<User, 'firstName' | 'lastName' | 'email' | 'phone'>
+        & { address?: Maybe<Array<(
+          { __typename?: 'Address' }
+          & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
+        )>> }
+      ), employee?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'firstName' | 'lastName' | 'role'>
+      )> }
+    ) }
+  )> }
+);
+
+export type ExpenseQueryVariables = Exact<{
+  data: Scalars['String'];
+}>;
+
+
+export type ExpenseQuery = (
+  { __typename?: 'Query' }
+  & { expense: (
+    { __typename?: 'Expense' }
+    & Pick<Expense, 'id' | 'cost' | 'expenseType'>
+    & { job: (
+      { __typename?: 'Job' }
+      & Pick<Job, 'id' | 'isComplete' | 'isPaid' | 'dateRequested' | 'dateCompleted' | 'cost' | 'datePaid' | 'jobType'>
+      & { customer: (
+        { __typename?: 'User' }
+        & Pick<User, 'firstName' | 'lastName' | 'email' | 'phone'>
+        & { address?: Maybe<Array<(
+          { __typename?: 'Address' }
+          & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
+        )>> }
+      ), employee?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'firstName' | 'lastName' | 'role'>
+      )> }
+    ) }
+  ) }
+);
+
+export type JobsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type JobsQuery = (
+  { __typename?: 'Query' }
+  & { jobs: Array<(
+    { __typename?: 'Job' }
+    & Pick<Job, 'id' | 'isComplete' | 'isPaid' | 'dateRequested' | 'dateCompleted' | 'cost' | 'datePaid' | 'jobType'>
+    & { customer: (
+      { __typename?: 'User' }
+      & Pick<User, 'firstName' | 'lastName' | 'email' | 'phone'>
+      & { address?: Maybe<Array<(
+        { __typename?: 'Address' }
+        & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
+      )>> }
+    ), employee?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'firstName' | 'lastName' | 'role'>
+    )>, expenses?: Maybe<Array<(
+      { __typename?: 'Expense' }
+      & Pick<Expense, 'cost' | 'expenseType'>
+    )>> }
+  )> }
+);
+
+export type JobQueryVariables = Exact<{
+  data: Scalars['String'];
+}>;
+
+
+export type JobQuery = (
+  { __typename?: 'Query' }
+  & { job: (
+    { __typename?: 'Job' }
+    & Pick<Job, 'id' | 'isComplete' | 'isPaid' | 'dateRequested' | 'dateCompleted' | 'cost' | 'datePaid' | 'jobType'>
+    & { customer: (
+      { __typename?: 'User' }
+      & Pick<User, 'firstName' | 'lastName' | 'email' | 'phone'>
+      & { address?: Maybe<Array<(
+        { __typename?: 'Address' }
+        & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
+      )>> }
+    ), employee?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'firstName' | 'lastName' | 'role'>
+    )>, expenses?: Maybe<Array<(
+      { __typename?: 'Expense' }
+      & Pick<Expense, 'cost' | 'expenseType'>
+    )>> }
+  ) }
+);
+
+export type JobsByCustomerQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type JobsByCustomerQuery = (
+  { __typename?: 'Query' }
+  & { jobsByCustomer: Array<(
+    { __typename?: 'Job' }
+    & Pick<Job, 'id' | 'isComplete' | 'isPaid' | 'dateRequested' | 'dateCompleted' | 'cost' | 'datePaid' | 'jobType'>
+    & { customer: (
+      { __typename?: 'User' }
+      & Pick<User, 'firstName' | 'lastName' | 'email' | 'phone'>
+      & { address?: Maybe<Array<(
+        { __typename?: 'Address' }
+        & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
+      )>> }
+    ), employee?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'firstName' | 'lastName' | 'role'>
+    )>, expenses?: Maybe<Array<(
+      { __typename?: 'Expense' }
+      & Pick<Expense, 'cost' | 'expenseType'>
+    )>> }
+  )> }
 );
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
@@ -431,6 +714,94 @@ export const DeleteAddressDocument = gql`
     document = DeleteAddressDocument;
     
   }
+export const CreateExpenseDocument = gql`
+    mutation createExpense($data: ExpenseInput!) {
+  createExpense(input: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateExpenseGQL extends Apollo.Mutation<CreateExpenseMutation, CreateExpenseMutationVariables> {
+    document = CreateExpenseDocument;
+    
+  }
+export const DeleteExpenseDocument = gql`
+    mutation deleteExpense($data: String!) {
+  deleteExpense(id: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteExpenseGQL extends Apollo.Mutation<DeleteExpenseMutation, DeleteExpenseMutationVariables> {
+    document = DeleteExpenseDocument;
+    
+  }
+export const CreateJobDocument = gql`
+    mutation createJob($data: JobInput!) {
+  createJob(input: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateJobGQL extends Apollo.Mutation<CreateJobMutation, CreateJobMutationVariables> {
+    document = CreateJobDocument;
+    
+  }
+export const DeleteJobDocument = gql`
+    mutation deleteJob($data: String!) {
+  deleteJob(id: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteJobGQL extends Apollo.Mutation<DeleteJobMutation, DeleteJobMutationVariables> {
+    document = DeleteJobDocument;
+    
+  }
 export const RegisterDocument = gql`
     mutation register($data: RegisterInput!) {
   register(input: $data) {
@@ -494,6 +865,94 @@ export const LogoutDocument = gql`
     document = LogoutDocument;
     
   }
+export const ConfirmUserDocument = gql`
+    mutation confirmUser($data: String!) {
+  confirmUser(token: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ConfirmUserGQL extends Apollo.Mutation<ConfirmUserMutation, ConfirmUserMutationVariables> {
+    document = ConfirmUserDocument;
+    
+  }
+export const ForgotPasswordDocument = gql`
+    mutation forgotPassword($data: String!) {
+  forgotPassword(email: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ForgotPasswordGQL extends Apollo.Mutation<ForgotPasswordMutation, ForgotPasswordMutationVariables> {
+    document = ForgotPasswordDocument;
+    
+  }
+export const ChangePasswordDocument = gql`
+    mutation changePassword($data: ChangePasswordInput!) {
+  changePassword(input: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ChangePasswordGQL extends Apollo.Mutation<ChangePasswordMutation, ChangePasswordMutationVariables> {
+    document = ChangePasswordDocument;
+    
+  }
+export const DeleteUserDocument = gql`
+    mutation deleteUser($data: String!) {
+  deleteUser(id: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteUserGQL extends Apollo.Mutation<DeleteUserMutation, DeleteUserMutationVariables> {
+    document = DeleteUserDocument;
+    
+  }
 export const AddressesDocument = gql`
     query addresses {
   addresses {
@@ -530,6 +989,223 @@ export const AddressDocument = gql`
   })
   export class AddressGQL extends Apollo.Query<AddressQuery, AddressQueryVariables> {
     document = AddressDocument;
+    
+  }
+export const ExpensesDocument = gql`
+    query expenses {
+  expenses {
+    id
+    cost
+    job {
+      id
+      customer {
+        firstName
+        lastName
+        email
+        phone
+        address {
+          street
+          city
+          state
+          zip
+        }
+      }
+      employee {
+        firstName
+        lastName
+        role
+      }
+      isComplete
+      isPaid
+      dateRequested
+      dateCompleted
+      cost
+      datePaid
+      jobType
+    }
+    expenseType
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ExpensesGQL extends Apollo.Query<ExpensesQuery, ExpensesQueryVariables> {
+    document = ExpensesDocument;
+    
+  }
+export const ExpenseDocument = gql`
+    query expense($data: String!) {
+  expense(id: $data) {
+    id
+    cost
+    job {
+      id
+      customer {
+        firstName
+        lastName
+        email
+        phone
+        address {
+          street
+          city
+          state
+          zip
+        }
+      }
+      employee {
+        firstName
+        lastName
+        role
+      }
+      isComplete
+      isPaid
+      dateRequested
+      dateCompleted
+      cost
+      datePaid
+      jobType
+    }
+    expenseType
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ExpenseGQL extends Apollo.Query<ExpenseQuery, ExpenseQueryVariables> {
+    document = ExpenseDocument;
+    
+  }
+export const JobsDocument = gql`
+    query jobs {
+  jobs {
+    id
+    customer {
+      firstName
+      lastName
+      email
+      phone
+      address {
+        street
+        city
+        state
+        zip
+      }
+    }
+    employee {
+      firstName
+      lastName
+      role
+    }
+    isComplete
+    isPaid
+    dateRequested
+    dateCompleted
+    cost
+    datePaid
+    jobType
+    expenses {
+      cost
+      expenseType
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class JobsGQL extends Apollo.Query<JobsQuery, JobsQueryVariables> {
+    document = JobsDocument;
+    
+  }
+export const JobDocument = gql`
+    query job($data: String!) {
+  job(id: $data) {
+    id
+    customer {
+      firstName
+      lastName
+      email
+      phone
+      address {
+        street
+        city
+        state
+        zip
+      }
+    }
+    employee {
+      firstName
+      lastName
+      role
+    }
+    isComplete
+    isPaid
+    dateRequested
+    dateCompleted
+    cost
+    datePaid
+    jobType
+    expenses {
+      cost
+      expenseType
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class JobGQL extends Apollo.Query<JobQuery, JobQueryVariables> {
+    document = JobDocument;
+    
+  }
+export const JobsByCustomerDocument = gql`
+    query jobsByCustomer {
+  jobsByCustomer {
+    id
+    customer {
+      firstName
+      lastName
+      email
+      phone
+      address {
+        street
+        city
+        state
+        zip
+      }
+    }
+    employee {
+      firstName
+      lastName
+      role
+    }
+    isComplete
+    isPaid
+    dateRequested
+    dateCompleted
+    cost
+    datePaid
+    jobType
+    expenses {
+      cost
+      expenseType
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class JobsByCustomerGQL extends Apollo.Query<JobsByCustomerQuery, JobsByCustomerQueryVariables> {
+    document = JobsByCustomerDocument;
     
   }
 export const UsersDocument = gql`
@@ -606,11 +1282,24 @@ export const UserDocument = gql`
     constructor(
       private createAddressGql: CreateAddressGQL,
       private deleteAddressGql: DeleteAddressGQL,
+      private createExpenseGql: CreateExpenseGQL,
+      private deleteExpenseGql: DeleteExpenseGQL,
+      private createJobGql: CreateJobGQL,
+      private deleteJobGql: DeleteJobGQL,
       private registerGql: RegisterGQL,
       private loginGql: LoginGQL,
       private logoutGql: LogoutGQL,
+      private confirmUserGql: ConfirmUserGQL,
+      private forgotPasswordGql: ForgotPasswordGQL,
+      private changePasswordGql: ChangePasswordGQL,
+      private deleteUserGql: DeleteUserGQL,
       private addressesGql: AddressesGQL,
       private addressGql: AddressGQL,
+      private expensesGql: ExpensesGQL,
+      private expenseGql: ExpenseGQL,
+      private jobsGql: JobsGQL,
+      private jobGql: JobGQL,
+      private jobsByCustomerGql: JobsByCustomerGQL,
       private usersGql: UsersGQL,
       private userGql: UserGQL
     ) {}
@@ -623,6 +1312,22 @@ export const UserDocument = gql`
       return this.deleteAddressGql.mutate(variables, options)
     }
     
+    createExpense(variables: CreateExpenseMutationVariables, options?: MutationOptionsAlone<CreateExpenseMutation, CreateExpenseMutationVariables>) {
+      return this.createExpenseGql.mutate(variables, options)
+    }
+    
+    deleteExpense(variables: DeleteExpenseMutationVariables, options?: MutationOptionsAlone<DeleteExpenseMutation, DeleteExpenseMutationVariables>) {
+      return this.deleteExpenseGql.mutate(variables, options)
+    }
+    
+    createJob(variables: CreateJobMutationVariables, options?: MutationOptionsAlone<CreateJobMutation, CreateJobMutationVariables>) {
+      return this.createJobGql.mutate(variables, options)
+    }
+    
+    deleteJob(variables: DeleteJobMutationVariables, options?: MutationOptionsAlone<DeleteJobMutation, DeleteJobMutationVariables>) {
+      return this.deleteJobGql.mutate(variables, options)
+    }
+    
     register(variables: RegisterMutationVariables, options?: MutationOptionsAlone<RegisterMutation, RegisterMutationVariables>) {
       return this.registerGql.mutate(variables, options)
     }
@@ -633,6 +1338,22 @@ export const UserDocument = gql`
     
     logout(variables?: LogoutMutationVariables, options?: MutationOptionsAlone<LogoutMutation, LogoutMutationVariables>) {
       return this.logoutGql.mutate(variables, options)
+    }
+    
+    confirmUser(variables: ConfirmUserMutationVariables, options?: MutationOptionsAlone<ConfirmUserMutation, ConfirmUserMutationVariables>) {
+      return this.confirmUserGql.mutate(variables, options)
+    }
+    
+    forgotPassword(variables: ForgotPasswordMutationVariables, options?: MutationOptionsAlone<ForgotPasswordMutation, ForgotPasswordMutationVariables>) {
+      return this.forgotPasswordGql.mutate(variables, options)
+    }
+    
+    changePassword(variables: ChangePasswordMutationVariables, options?: MutationOptionsAlone<ChangePasswordMutation, ChangePasswordMutationVariables>) {
+      return this.changePasswordGql.mutate(variables, options)
+    }
+    
+    deleteUser(variables: DeleteUserMutationVariables, options?: MutationOptionsAlone<DeleteUserMutation, DeleteUserMutationVariables>) {
+      return this.deleteUserGql.mutate(variables, options)
     }
     
     addresses(variables?: AddressesQueryVariables, options?: QueryOptionsAlone<AddressesQueryVariables>) {
@@ -649,6 +1370,46 @@ export const UserDocument = gql`
     
     addressWatch(variables: AddressQueryVariables, options?: WatchQueryOptionsAlone<AddressQueryVariables>) {
       return this.addressGql.watch(variables, options)
+    }
+    
+    expenses(variables?: ExpensesQueryVariables, options?: QueryOptionsAlone<ExpensesQueryVariables>) {
+      return this.expensesGql.fetch(variables, options)
+    }
+    
+    expensesWatch(variables?: ExpensesQueryVariables, options?: WatchQueryOptionsAlone<ExpensesQueryVariables>) {
+      return this.expensesGql.watch(variables, options)
+    }
+    
+    expense(variables: ExpenseQueryVariables, options?: QueryOptionsAlone<ExpenseQueryVariables>) {
+      return this.expenseGql.fetch(variables, options)
+    }
+    
+    expenseWatch(variables: ExpenseQueryVariables, options?: WatchQueryOptionsAlone<ExpenseQueryVariables>) {
+      return this.expenseGql.watch(variables, options)
+    }
+    
+    jobs(variables?: JobsQueryVariables, options?: QueryOptionsAlone<JobsQueryVariables>) {
+      return this.jobsGql.fetch(variables, options)
+    }
+    
+    jobsWatch(variables?: JobsQueryVariables, options?: WatchQueryOptionsAlone<JobsQueryVariables>) {
+      return this.jobsGql.watch(variables, options)
+    }
+    
+    job(variables: JobQueryVariables, options?: QueryOptionsAlone<JobQueryVariables>) {
+      return this.jobGql.fetch(variables, options)
+    }
+    
+    jobWatch(variables: JobQueryVariables, options?: WatchQueryOptionsAlone<JobQueryVariables>) {
+      return this.jobGql.watch(variables, options)
+    }
+    
+    jobsByCustomer(variables?: JobsByCustomerQueryVariables, options?: QueryOptionsAlone<JobsByCustomerQueryVariables>) {
+      return this.jobsByCustomerGql.fetch(variables, options)
+    }
+    
+    jobsByCustomerWatch(variables?: JobsByCustomerQueryVariables, options?: WatchQueryOptionsAlone<JobsByCustomerQueryVariables>) {
+      return this.jobsByCustomerGql.watch(variables, options)
     }
     
     users(variables?: UsersQueryVariables, options?: QueryOptionsAlone<UsersQueryVariables>) {

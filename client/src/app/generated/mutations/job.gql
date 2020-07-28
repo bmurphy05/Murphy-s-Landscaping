@@ -1,0 +1,25 @@
+mutation createJob($data: JobInput!) {
+  createJob(input: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+
+mutation deleteJob($data: String!) {
+  deleteJob(id: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
