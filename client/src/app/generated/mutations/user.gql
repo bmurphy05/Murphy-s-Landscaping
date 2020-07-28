@@ -33,3 +33,56 @@ mutation login($data: LoginInput!) {
 mutation logout {
   logout
 }
+
+mutation confirmUser($data: String!){
+  confirmUser(token: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+
+mutation forgotPassword($data: String!){
+  forgotPassword(email: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+
+mutation changePassword($data: ChangePasswordInput!){
+  changePassword(input: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+
+mutation deleteUser($data: String!){
+  deleteUser(id: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+

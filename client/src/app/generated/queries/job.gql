@@ -1,0 +1,101 @@
+query jobs{
+  jobs{
+    id
+    customer{
+        firstName
+        lastName
+        email
+        phone
+        address {
+          street
+          city
+          state
+          zip
+        }
+      }
+    employee{
+        firstName
+        lastName
+        role
+      }
+    isComplete
+    isPaid
+    dateRequested
+    dateCompleted
+    cost
+    datePaid
+    jobType
+    expenses{
+      cost
+      expenseType
+    }
+  }
+}
+
+query job($data: String!){
+  job(id: $data) {
+    id
+    customer{
+        firstName
+        lastName
+        email
+        phone
+        address {
+          street
+          city
+          state
+          zip
+        }
+      }
+    employee{
+        firstName
+        lastName
+        role
+      }
+    isComplete
+    isPaid
+    dateRequested
+    dateCompleted
+    cost
+    datePaid
+    jobType
+    expenses{
+      cost
+      expenseType
+    }
+  }
+}
+
+query jobsByCustomer{
+  jobsByCustomer {
+    id
+    customer{
+        firstName
+        lastName
+        email
+        phone
+        address {
+          street
+          city
+          state
+          zip
+        }
+      }
+    employee{
+        firstName
+        lastName
+        role
+      }
+    isComplete
+    isPaid
+    dateRequested
+    dateCompleted
+    cost
+    datePaid
+    jobType
+    expenses{
+      cost
+      expenseType
+    }
+  }
+}

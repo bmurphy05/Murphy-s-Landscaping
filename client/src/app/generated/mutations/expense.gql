@@ -1,0 +1,25 @@
+mutation createExpense($data: ExpenseInput!) {
+  createExpense(input: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
+
+mutation deleteExpense($data: String!) {
+  deleteExpense(id: $data) {
+    success {
+      path
+      message
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
