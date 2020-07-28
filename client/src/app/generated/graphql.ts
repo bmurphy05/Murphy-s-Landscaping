@@ -34,6 +34,8 @@ export type User = {
   password: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
+  fullName: Scalars['String'];
+  initialName: Scalars['String'];
   phone: Scalars['String'];
   address?: Maybe<Array<Address>>;
   role: Scalars['String'];
@@ -132,6 +134,10 @@ export type RegisterInput = {
   role: Scalars['String'];
 };
 
+export type UserInput = {
+  id: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   addresses: Array<Address>;
@@ -163,7 +169,7 @@ export type QueryJobArgs = {
 
 
 export type QueryUserArgs = {
-  id: Scalars['String'];
+  input: UserInput;
 };
 
 export type Mutation = {
@@ -520,14 +526,14 @@ export type ExpensesQuery = (
       & Pick<Job, 'id' | 'isComplete' | 'isPaid' | 'dateRequested' | 'dateCompleted' | 'cost' | 'datePaid' | 'jobType'>
       & { customer: (
         { __typename?: 'User' }
-        & Pick<User, 'firstName' | 'lastName' | 'email' | 'phone'>
+        & Pick<User, 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'email' | 'phone'>
         & { address?: Maybe<Array<(
           { __typename?: 'Address' }
           & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
         )>> }
       ), employee?: Maybe<(
         { __typename?: 'User' }
-        & Pick<User, 'firstName' | 'lastName' | 'role'>
+        & Pick<User, 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'role'>
       )> }
     ) }
   )> }
@@ -548,14 +554,14 @@ export type ExpenseQuery = (
       & Pick<Job, 'id' | 'isComplete' | 'isPaid' | 'dateRequested' | 'dateCompleted' | 'cost' | 'datePaid' | 'jobType'>
       & { customer: (
         { __typename?: 'User' }
-        & Pick<User, 'firstName' | 'lastName' | 'email' | 'phone'>
+        & Pick<User, 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'email' | 'phone'>
         & { address?: Maybe<Array<(
           { __typename?: 'Address' }
           & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
         )>> }
       ), employee?: Maybe<(
         { __typename?: 'User' }
-        & Pick<User, 'firstName' | 'lastName' | 'role'>
+        & Pick<User, 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'role'>
       )> }
     ) }
   ) }
@@ -571,14 +577,14 @@ export type JobsQuery = (
     & Pick<Job, 'id' | 'isComplete' | 'isPaid' | 'dateRequested' | 'dateCompleted' | 'cost' | 'datePaid' | 'jobType'>
     & { customer: (
       { __typename?: 'User' }
-      & Pick<User, 'firstName' | 'lastName' | 'email' | 'phone'>
+      & Pick<User, 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'email' | 'phone'>
       & { address?: Maybe<Array<(
         { __typename?: 'Address' }
         & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
       )>> }
     ), employee?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'firstName' | 'lastName' | 'role'>
+      & Pick<User, 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'role'>
     )>, expenses?: Maybe<Array<(
       { __typename?: 'Expense' }
       & Pick<Expense, 'cost' | 'expenseType'>
@@ -598,14 +604,14 @@ export type JobQuery = (
     & Pick<Job, 'id' | 'isComplete' | 'isPaid' | 'dateRequested' | 'dateCompleted' | 'cost' | 'datePaid' | 'jobType'>
     & { customer: (
       { __typename?: 'User' }
-      & Pick<User, 'firstName' | 'lastName' | 'email' | 'phone'>
+      & Pick<User, 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'email' | 'phone'>
       & { address?: Maybe<Array<(
         { __typename?: 'Address' }
         & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
       )>> }
     ), employee?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'firstName' | 'lastName' | 'role'>
+      & Pick<User, 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'role'>
     )>, expenses?: Maybe<Array<(
       { __typename?: 'Expense' }
       & Pick<Expense, 'cost' | 'expenseType'>
@@ -623,14 +629,14 @@ export type JobsByCustomerQuery = (
     & Pick<Job, 'id' | 'isComplete' | 'isPaid' | 'dateRequested' | 'dateCompleted' | 'cost' | 'datePaid' | 'jobType'>
     & { customer: (
       { __typename?: 'User' }
-      & Pick<User, 'firstName' | 'lastName' | 'email' | 'phone'>
+      & Pick<User, 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'email' | 'phone'>
       & { address?: Maybe<Array<(
         { __typename?: 'Address' }
         & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
       )>> }
     ), employee?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'firstName' | 'lastName' | 'role'>
+      & Pick<User, 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'role'>
     )>, expenses?: Maybe<Array<(
       { __typename?: 'Expense' }
       & Pick<Expense, 'cost' | 'expenseType'>
@@ -645,7 +651,7 @@ export type UsersQuery = (
   { __typename?: 'Query' }
   & { users: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'firstName' | 'lastName' | 'email' | 'phone' | 'role' | 'creationTime'>
+    & Pick<User, 'id' | 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'email' | 'phone' | 'role' | 'confirmed' | 'creationTime'>
     & { address?: Maybe<Array<(
       { __typename?: 'Address' }
       & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
@@ -654,7 +660,7 @@ export type UsersQuery = (
 );
 
 export type UserQueryVariables = Exact<{
-  data: Scalars['String'];
+  data: UserInput;
 }>;
 
 
@@ -662,7 +668,7 @@ export type UserQuery = (
   { __typename?: 'Query' }
   & { user: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'firstName' | 'lastName' | 'email' | 'phone' | 'role' | 'creationTime'>
+    & Pick<User, 'id' | 'firstName' | 'lastName' | 'fullName' | 'initialName' | 'email' | 'phone' | 'role' | 'confirmed' | 'creationTime'>
     & { address?: Maybe<Array<(
       { __typename?: 'Address' }
       & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
@@ -1001,6 +1007,8 @@ export const ExpensesDocument = gql`
       customer {
         firstName
         lastName
+        fullName
+        initialName
         email
         phone
         address {
@@ -1013,6 +1021,8 @@ export const ExpensesDocument = gql`
       employee {
         firstName
         lastName
+        fullName
+        initialName
         role
       }
       isComplete
@@ -1045,6 +1055,8 @@ export const ExpenseDocument = gql`
       customer {
         firstName
         lastName
+        fullName
+        initialName
         email
         phone
         address {
@@ -1057,6 +1069,8 @@ export const ExpenseDocument = gql`
       employee {
         firstName
         lastName
+        fullName
+        initialName
         role
       }
       isComplete
@@ -1086,6 +1100,8 @@ export const JobsDocument = gql`
     customer {
       firstName
       lastName
+      fullName
+      initialName
       email
       phone
       address {
@@ -1098,6 +1114,8 @@ export const JobsDocument = gql`
     employee {
       firstName
       lastName
+      fullName
+      initialName
       role
     }
     isComplete
@@ -1129,6 +1147,8 @@ export const JobDocument = gql`
     customer {
       firstName
       lastName
+      fullName
+      initialName
       email
       phone
       address {
@@ -1141,6 +1161,8 @@ export const JobDocument = gql`
     employee {
       firstName
       lastName
+      fullName
+      initialName
       role
     }
     isComplete
@@ -1172,6 +1194,8 @@ export const JobsByCustomerDocument = gql`
     customer {
       firstName
       lastName
+      fullName
+      initialName
       email
       phone
       address {
@@ -1184,6 +1208,8 @@ export const JobsByCustomerDocument = gql`
     employee {
       firstName
       lastName
+      fullName
+      initialName
       role
     }
     isComplete
@@ -1214,6 +1240,8 @@ export const UsersDocument = gql`
     id
     firstName
     lastName
+    fullName
+    initialName
     email
     phone
     address {
@@ -1223,6 +1251,7 @@ export const UsersDocument = gql`
       zip
     }
     role
+    confirmed
     creationTime
   }
 }
@@ -1236,11 +1265,13 @@ export const UsersDocument = gql`
     
   }
 export const UserDocument = gql`
-    query user($data: String!) {
-  user(id: $data) {
+    query user($data: UserInput!) {
+  user(input: $data) {
     id
     firstName
     lastName
+    fullName
+    initialName
     email
     phone
     address {
@@ -1250,6 +1281,7 @@ export const UserDocument = gql`
       zip
     }
     role
+    confirmed
     creationTime
   }
 }

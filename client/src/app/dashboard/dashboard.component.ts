@@ -1,29 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ApolloAngularSDK, User } from '../generated/graphql';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-  userSub: Subscription;
-  users: any[];
+export class DashboardComponent implements OnInit {
 
-  constructor(
-    private apolloSdk: ApolloAngularSDK
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.userSub = this.apolloSdk.users()
-      .subscribe(data => {
-        console.log(data);
-        this.users = data.data.users;
-      });
-  }
+  ngOnInit(): void { }
 
-  ngOnDestroy(): void {
-    this.userSub.unsubscribe();
-  }
 }

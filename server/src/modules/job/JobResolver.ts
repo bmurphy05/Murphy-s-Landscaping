@@ -8,7 +8,7 @@ import { Result } from '../../shared/Result';
 
 @Resolver()
 export class JobResolver {
-  @UseMiddleware(isAuth, isEmployee, logger)
+  @UseMiddleware(isEmployee, logger)
   @Query(() => [Job])
   async jobs() {
     return Job.find({
@@ -16,7 +16,7 @@ export class JobResolver {
     });
   }
 
-  @UseMiddleware(isAuth, logger)
+  @UseMiddleware(logger)
   @Query(() => [Job])
   async jobsByCustomer(customer: string) {
     return Job.find({
@@ -27,7 +27,7 @@ export class JobResolver {
     });
   }
 
-  @UseMiddleware(isAuth, logger)
+  @UseMiddleware(logger)
   @Query(() => Job)
   async job(@Arg('id') id: string) {
     return Job.findOne({

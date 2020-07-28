@@ -3,6 +3,8 @@ query users {
     id
     firstName
     lastName
+    fullName
+    initialName
     email
     phone
     address {
@@ -12,15 +14,18 @@ query users {
       zip
     }
     role
+    confirmed
     creationTime
   }
 }
 
-query user($data: String!) {
-  user(id: $data) {
+query user($data: UserInput!) {
+  user(input: $data) {
     id
     firstName
     lastName
+    fullName
+    initialName
     email
     phone
     address {
@@ -30,6 +35,7 @@ query user($data: String!) {
       zip
     }
     role
+    confirmed
     creationTime
   }
 }

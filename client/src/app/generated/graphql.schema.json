@@ -222,6 +222,38 @@
             "deprecationReason": null
           },
           {
+            "name": "fullName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "initialName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "phone",
             "description": null,
             "args": [],
@@ -1192,6 +1224,31 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "UserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Query",
         "description": null,
@@ -1426,14 +1483,14 @@
             "description": null,
             "args": [
               {
-                "name": "id",
+                "name": "input",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserInput",
                     "ofType": null
                   }
                 },
