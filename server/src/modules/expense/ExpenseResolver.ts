@@ -8,7 +8,7 @@ import { Result } from '../../shared/Result';
 
 @Resolver()
 export class ExpenseResolver {
-  @UseMiddleware(isAuth, isEmployee, logger)
+  @UseMiddleware(isEmployee, logger)
   @Query(() => [Expense])
   async expenses() {
     return Expense.find({
@@ -16,7 +16,7 @@ export class ExpenseResolver {
     });
   }
 
-  @UseMiddleware(isAuth, isEmployee, logger)
+  @UseMiddleware(isEmployee, logger)
   @Query(() => Expense)
   async expense(@Arg('id') id: string) {
     return Expense.findOne({

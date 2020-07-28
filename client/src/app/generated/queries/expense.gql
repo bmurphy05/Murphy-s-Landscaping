@@ -7,6 +7,8 @@ query expenses{
       customer{
         firstName
         lastName
+        fullName
+        initialName
         email
         phone
         address {
@@ -19,6 +21,8 @@ query expenses{
       employee{
         firstName
         lastName
+        fullName
+        initialName
         role
       }
       isComplete
@@ -42,6 +46,8 @@ query expense($data: String!){
       customer{
         firstName
         lastName
+        fullName
+        initialName
         email
         phone
         address {
@@ -54,6 +60,8 @@ query expense($data: String!){
       employee{
         firstName
         lastName
+        fullName
+        initialName
         role
       }
       isComplete

@@ -7,7 +7,7 @@ import {
     BeforeInsert,
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
-import { ObjectType, Field } from 'type-graphql';
+import { ObjectType, Field, Root } from 'type-graphql';
 import { Address } from './Address';
 
 
@@ -34,6 +34,16 @@ export class User extends BaseEntity {
     @Column('text')
     lastName!: string;
 
+    @Field()
+    fullName(@Root() parent: User): string {
+      return `${parent.firstName} ${parent.lastName}`;
+    }
+  
+    @Field()
+    initialName(@Root() parent: User): string {
+      return `${parent.firstName.substring(0, 1)}. ${parent.lastName}`;
+    }
+    
     @Field()
     @Column('text')
     phone!: string;

@@ -18,6 +18,7 @@ import { LoginInput } from "./input/LoginInput";
 import { isAuth } from "../../middleware/isAuth";
 import { isEmployee } from "../../middleware/isEmployee";
 import { logger } from "../../middleware/logger";
+import { UserInput } from "./input/UserInput";
 
 @Resolver()
 export class UserResolver {
@@ -31,7 +32,9 @@ export class UserResolver {
   }
 
   @Query(() => User)
-  async user(@Arg("id") id: string) {
+  async user(@Arg("input") {
+    id
+  }: UserInput) {
     return User.findOne({
       relations: [
         'address'
