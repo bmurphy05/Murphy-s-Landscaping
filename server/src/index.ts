@@ -11,7 +11,7 @@ import connectRedis from 'connect-redis';
 import cookieParser from 'cookie-parser';
 import { verify } from 'jsonwebtoken';
 import { redis } from './redis';
-import { redisSessionPrefix } from './constants';
+import { redisSessionPrefix, baseUrl } from './constants';
 import { User } from './entity/User';
 import { createAccessToken, createRefreshToken } from './shared/auth';
 import { sendRefreshToken } from './shared/sendRefreshToken';
@@ -23,12 +23,12 @@ import { sendRefreshToken } from './shared/sendRefreshToken';
 
   const corOptions = {
     credentials: true,
-    origin: ['http://localhost:4200']
+    origin: [baseUrl]
   };
 
   app.use(cookieParser());
   app.post('/refresh_token', async (req, res) => {
-    const token = req.cookies.uid;
+    const token = req.cookies.accessToken;
 
 
     if (!token) {
@@ -126,6 +126,6 @@ import { sendRefreshToken } from './shared/sendRefreshToken';
   const port = process.env.PORT || 4000;
 
   httpServer.listen(port, async () => {
-    console.log(chalk.magentaBright('Murphy`s Landscaping server is running on ') + chalk.greenBright('localhost:4000') + chalk.magentaBright('...'));
+    console.log(chalk.magentaBright('Murphy`s Landscaping server is running on ') + chalk.greenBright(baseUrl) + chalk.magentaBright('...'));
   });
 })();

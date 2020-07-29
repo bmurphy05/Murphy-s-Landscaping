@@ -14,6 +14,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from './app-material.module';
 import { UserTableComponent } from './users/user-table/user-table.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { LoadingComponent } from './ui/loading/loading.component';
+import { BreadcrumbComponent } from './ui/breadcrumb/breadcrumb.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,11 @@ import { UserDetailComponent } from './users/user-detail/user-detail.component';
     DashboardComponent,
     UsersComponent,
     UserTableComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    LoadingComponent,
+    BreadcrumbComponent,
+    SigninComponent,
+    RegisterComponent
   ],
   imports: [
     AppMaterialModule,
@@ -35,7 +44,7 @@ import { UserDetailComponent } from './users/user-detail/user-detail.component';
     HttpClientModule,
     GraphQLModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
