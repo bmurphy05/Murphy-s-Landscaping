@@ -16,8 +16,7 @@ mutation login($data: LoginInput!) {
     success {
       user {
         id
-        firstName
-        lastName
+        fullName
         role
       }
       accessToken
