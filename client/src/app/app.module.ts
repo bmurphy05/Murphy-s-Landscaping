@@ -20,6 +20,11 @@ import { ExpenseDetailComponent } from './expenses/expense-detail/expense-detail
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { ExpensesComponent } from './expenses/expenses.component';
+import { LoadingComponent } from './ui/loading/loading.component';
+import { BreadcrumbComponent } from './ui/breadcrumb/breadcrumb.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,11 @@ import { ExpensesComponent } from './expenses/expenses.component';
     JobsComponent,
     ExpensesComponent,
     UserTableComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    LoadingComponent,
+    BreadcrumbComponent,
+    SigninComponent,
+    RegisterComponent
   ],
   imports: [
     AppMaterialModule,
@@ -47,7 +56,7 @@ import { ExpensesComponent } from './expenses/expenses.component';
     HttpClientModule,
     GraphQLModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

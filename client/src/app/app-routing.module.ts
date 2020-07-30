@@ -8,6 +8,9 @@ import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { ExpenseDetailComponent } from './expenses/expense-detail/expense-detail.component';
+import { AuthGuard } from './auth/auth.guard';
+import { SigninComponent } from './auth/signin/signin.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -16,17 +19,40 @@ const routes: Routes = [
     component: LandingComponent
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent
+    path: 'signin',
+    component: SigninComponent
   },
   {
-    path: 'users',
-    component: UsersComponent,
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+    data: {
+      title: 'Dashboard',
+      breadcrumb: 'Dashboard'
+    },
     children: [
       {
-        path: ':id',
-        component: UserDetailComponent
-      }
+        path: 'users',
+        component: UsersComponent,
+        data: {
+          title: 'Users',
+          breadcrumb: 'Users'
+        },
+        children: [
+          {
+            path: ':id',
+            component: UserDetailComponent,
+            data: {
+              title: 'User',
+              breadcrumb: 'User'
+            }
+          }
+        ]
+      },
     ]
   },
   {

@@ -1,0 +1,43 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1.0%">
+  <div class="form-container" fxFlex="100%">
+    <div class="main-loading" *ngIf="loading">
+      <app-loading></app-loading>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="signin()" class="form" *ngIf="!loading">
+      <mat-card class="form-card">
+        <mat-card-header>
+          <div mat-card-avatar class="auth-header-image"></div>
+          <mat-card-title>Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="form-group">
+            <mat-form-field appearance="standard">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Enter Email" type="text" formControlName="email" class="form-control">
+            </mat-form-field>
+            <div class="invalid-label" *ngIf="!isValidEmail">Please enter a valid email</div>
+          </div>
+          <div class="form-group">
+            <mat-form-field appearance="standard">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Enter Password" type="password" formControlName="password"
+                class="form-control" secure="true">
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="form-group">
+            <button mat-raised-button color="primary" [disabled]="loading" class="btn btn-primary auth-btn">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Login
+            </button>
+            <button mat-raised-button color="accent" class="auth-btn" (click)="onRegisterClick()">Register</button>
+          </div>
+          <div class="center">
+            <button mat-button color="primary" (click)="onForgotPasswordClick()">Forgot Password</button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+</div>

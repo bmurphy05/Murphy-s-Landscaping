@@ -1,0 +1,16 @@
+query me {
+  me {
+    id
+    fullName
+    role
+    email
+    phone
+    address {
+      street
+      city
+      state
+      zip
+    }
+    creationTime
+  }
+}

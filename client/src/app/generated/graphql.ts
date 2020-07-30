@@ -404,7 +404,7 @@ export type LoginMutation = (
       & Pick<LoginSuccess, 'accessToken' | 'expiresIn'>
       & { user?: Maybe<(
         { __typename?: 'User' }
-        & Pick<User, 'id' | 'firstName' | 'lastName' | 'role'>
+        & Pick<User, 'id' | 'fullName' | 'role'>
       )> }
     )>, errors?: Maybe<Array<(
       { __typename?: 'Response' }
@@ -652,6 +652,21 @@ export type JobsByCustomerQuery = (
   )> }
 );
 
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'fullName' | 'role' | 'email' | 'phone' | 'creationTime'>
+    & { address?: Maybe<Array<(
+      { __typename?: 'Address' }
+      & Pick<Address, 'street' | 'city' | 'state' | 'zip'>
+    )>> }
+  )> }
+);
+
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -844,8 +859,7 @@ export const LoginDocument = gql`
     success {
       user {
         id
-        firstName
-        lastName
+        fullName
         role
       }
       accessToken
@@ -1242,6 +1256,32 @@ export const JobsByCustomerDocument = gql`
     document = JobsByCustomerDocument;
     
   }
+export const MeDocument = gql`
+    query me {
+  me {
+    id
+    fullName
+    role
+    email
+    phone
+    address {
+      street
+      city
+      state
+      zip
+    }
+    creationTime
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class MeGQL extends Apollo.Query<MeQuery, MeQueryVariables> {
+    document = MeDocument;
+    
+  }
 export const UsersDocument = gql`
     query users {
   users {
@@ -1340,6 +1380,7 @@ export const UserDocument = gql`
       private jobsGql: JobsGQL,
       private jobGql: JobGQL,
       private jobsByCustomerGql: JobsByCustomerGQL,
+      private meGql: MeGQL,
       private usersGql: UsersGQL,
       private userGql: UserGQL
     ) {}
@@ -1450,6 +1491,14 @@ export const UserDocument = gql`
     
     jobsByCustomerWatch(variables?: JobsByCustomerQueryVariables, options?: WatchQueryOptionsAlone<JobsByCustomerQueryVariables>) {
       return this.jobsByCustomerGql.watch(variables, options)
+    }
+    
+    me(variables?: MeQueryVariables, options?: QueryOptionsAlone<MeQueryVariables>) {
+      return this.meGql.fetch(variables, options)
+    }
+    
+    meWatch(variables?: MeQueryVariables, options?: WatchQueryOptionsAlone<MeQueryVariables>) {
+      return this.meGql.watch(variables, options)
     }
     
     users(variables?: UsersQueryVariables, options?: QueryOptionsAlone<UsersQueryVariables>) {

@@ -61,7 +61,6 @@ export class UserTableComponent implements OnInit, OnDestroy {
   }
 
   navigate(id: string) {
-    console.log(id);
     return this.router.navigate([`./users/${id}`]);
   }
 
