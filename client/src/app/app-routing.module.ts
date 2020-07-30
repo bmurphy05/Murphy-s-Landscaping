@@ -53,26 +53,26 @@ const routes: Routes = [
           }
         ]
       },
-    ]
-  },
-  {
-    path: 'jobs',
-    component: JobsComponent,
-    children: [
       {
-        path: ':id',
-        component: JobDetailComponent
-      }
-    ]
-  },
-  {
-    path: 'expenses',
-    component: ExpensesComponent,
-    children: [
+        path: 'jobs',
+        component: JobsComponent,
+        children: [
+          {
+            path: ':id',
+            component: JobDetailComponent
+          }
+        ]
+      },
       {
-        path: ':id',
-        component: ExpenseDetailComponent
-      }
+        path: 'expenses',
+        component: ExpensesComponent,
+        children: [
+          {
+            path: ':id',
+            component: ExpenseDetailComponent
+          }
+        ]
+      },
     ]
   },
 ];
