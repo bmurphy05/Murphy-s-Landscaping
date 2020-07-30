@@ -14,13 +14,25 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from './app-material.module';
 import { UserTableComponent } from './users/user-table/user-table.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { ExpenseTableComponent } from './expenses/expense-table/expense-table.component';
+import { JobTableComponent } from './jobs/job-table/job-table.component';
+import { ExpenseDetailComponent } from './expenses/expense-detail/expense-detail.component';
+import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
+import { JobsComponent } from './jobs/jobs.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     DashboardComponent,
+    ExpenseTableComponent,
+    ExpenseDetailComponent,
+    JobDetailComponent,
+    JobTableComponent,
     UsersComponent,
+    JobsComponent,
+    ExpensesComponent,
     UserTableComponent,
     UserDetailComponent
   ],
